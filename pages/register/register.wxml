@@ -1,0 +1,159 @@
+
+<view class="main">
+    <view class="group-card" wx:key="group" wx:for="{{form.groups}}" wx:for-item="group">
+        <view class="group-card__header">
+            <view class="group-title">{{group.title}}</view>
+            <t-divider></t-divider>
+            <view class="input-blob" wx:key="field" wx:for="{{group.fields}}" wx:for-item="field">
+                <view class="input-blob__label"> {{field.title}} </view>
+                <t-input
+                    placeholder="请输入{{field.title}}"
+                    borderless="{{true}}"
+                    style="{{inputStyle}}"
+                    wx:if="{{field.type=='ib'}}"
+                    data-group="{{group.key}}"
+                    data-field="{{field.key}}"
+                    bind:change="onUserInput"
+                />
+                <t-input
+                    value="{{form.dataset[group.key][field.key]}}"
+                    borderless="{{true}}"
+                    style="{{inputStyle}}"
+                    wx:if="{{field.type=='lb'}}"
+                    disabled
+                />
+                <t-cell 
+                    title="{{form.dataset[group.key][field.key]}}" 
+                    note="{{field.note}}" 
+                    bind:click="showCascader" 
+                    wx:if="{{field.type=='cc'}}"
+                    style="{{inputStyle}}"
+                    data-group="{{group.key}}"
+                    data-field="{{field.key}}"
+                    data-title="{{field.popupTitle}}"
+                    data-options="{{field.options}}"
+                    arrow
+                ></t-cell>
+
+                <t-swipe-cell 
+                    wx:if="{{field.type=='il'}}" 
+                    wx:key="unit" 
+                    wx:for="{{form.dataset[group.key][field.key]}}" style="{{cellStyle}}"
+                    wx:for-item="unit"
+                    wx:for-index="unitIndex"
+                >
+                    <t-cell
+                        bordered="{{false}}"
+                        title="{{unit[0]}}"
+                        description="{{unit[1]}}"
+                        note="◁"
+                        data-group="{{group.key}}"
+                        data-field="{{field.key}}"
+                        data-index="{{unitIndex}}"
+                        data-params="{{field.params}}"
+                        bind:tap="onEdit"
+                    />
+                    <view slot="right" class="btn-wrapper">
+                        <!--view 
+                            class="btn edit-btn column"
+                            bind:tap="onEdit"
+                        >
+                            <t-icon class="padding-bottom" name="edit" size="32rpx"></t-icon>
+                            编辑
+                        </view-->
+                        <view 
+                            class="btn delete-btn column" 
+                            bind:tap="onDelete"
+                            data-group="{{group.key}}"
+                            data-field="{{field.key}}"
+                            data-index="{{unitIndex}}"
+                            data-params="{{field.params}}"
+                        >
+                            <t-icon class="padding-bottom" name="delete" size="32rpx"></t-icon>
+                            删除
+                        </view>
+                    </view>
+                </t-swipe-cell>
+
+                <view class="add-btn" 
+                    wx:if="{{field.type=='il'}}"
+                    bindtap="onAddItem"
+                    data-group="{{group.key}}"
+                    data-field="{{field.key}}"
+                    data-defs="{{field.defaults}}"
+                    data-params="{{field.params}}">
+                    +
+                </view>
+
+            </view>
+        </view>
+    </view>
+    <t-button 
+        wx:if="{{state == 'editing'}}"
+        theme="primary" 
+        size="large" 
+        icon="cloud"
+        style="width:85%; margin-bottom: 40rpx; margin-top: 30rpx"
+        bindtap="onSubmit"
+    >提交</t-button>
+    <t-button 
+        wx:if="{{state == 'processing'}}"
+        loading
+        theme="primary" 
+        size="large" 
+        style="width:85%; margin-bottom: 40rpx; margin-top: 30rpx"
+    >上传中</t-button>
+</view>
+
+<!--image="https://tdesign.gtimg.com/miniprogram/images/default.svg"-->
+<t-cascader
+    visible="{{cas.on}}"
+    theme="tab"
+    options="{{cas.options}}"
+    title="{{cas.title}}"
+    data-group="{{cas.group}}"
+    data-field="{{cas.field}}"
+    bind:change="onUserInput"
+    bind:close="onCancelEdit"
+></t-cascader>
+
+<t-popup 
+    visible="{{pop.on}}" 
+    placement="center"
+    bind:visible-change="onCancelEdit"
+>
+    <view class="popup-block">
+        <view class="popup-header">
+            <view class="popup-btn popup-btn--cancel" 
+                aria-role="button" bindtap="onCancelEdit">
+                取消
+            </view>
+            <view class="popup-title">编辑</view>
+            <view class="popup-btn popup-btn--confirm" a
+                ria-role="button" bindtap="onConfirmEdit">
+                确定
+            </view>
+        </view>
+
+        <view 
+            class="input-blob"
+            wx:key="params"
+            wx:for="{{pop.params}}"
+            wx:for-item="param"
+            wx:for-index="paramInd"
+        >
+            <view class="input-blob__label"> {{param}} </view>
+            <t-input
+                placeholder="请输入{{param}}"
+                borderless="{{true}}"
+                style="{{inputStyle}}"
+                value="{{pop.values[paramInd]}}"
+                data-index="{{paramInd}}"
+                bind:change="onPopInput"
+            />
+        </view>
+    </view>
+</t-popup>
+
+<t-message id="t-message" />
+

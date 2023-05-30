@@ -1,0 +1,19 @@
+{
+    "usingComponents": {
+        "t-input": "tdesign-miniprogram/input/input",
+        "t-textarea": "tdesign-miniprogram/textarea/textarea",
+        "t-checkbox-group": "tdesign-miniprogram/checkbox-group/checkbox-group",
+        "t-checkbox": "tdesign-miniprogram/checkbox/checkbox",
+        "t-cell": "tdesign-miniprogram/cell/cell",
+        "t-picker": "tdesign-miniprogram/picker/picker",
+        "t-picker-item": "tdesign-miniprogram/picker-item/picker-item",
+        "t-divider": "tdesign-miniprogram/divider/divider",
+        "t-cascader": "tdesign-miniprogram/cascader/cascader",
+        "t-swipe-cell": "tdesign-miniprogram/swipe-cell/swipe-cell",
+        "t-icon": "tdesign-miniprogram/icon/icon",
+        "t-popup": "tdesign-miniprogram/popup/popup",
+        "t-button": "tdesign-miniprogram/button/button",
+        "t-message": "tdesign-miniprogram/message/message"
+      },
+      "navigationBarTitleText": "注册"
+}

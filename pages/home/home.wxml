@@ -1,0 +1,7 @@
+<view class="main">
+  
+  <view class="title-wrap">
+    <view class="title">欢迎回来！</view>
+  </view>
+  <image src="{{qrimage}}"></image>
+</view>

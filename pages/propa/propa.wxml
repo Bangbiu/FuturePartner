@@ -1,0 +1,9 @@
+<view class="page" >
+  <image class="bg" src="/assets/propa.jpg" style="height: {{bgh}}px;"></image>
+</view>
+
+<view class="main" style="top: {{bgh*0.45}}px;">
+    <button class="join-btn" bindtap="onJoin">
+        立即加入
+    </button>
+</view>

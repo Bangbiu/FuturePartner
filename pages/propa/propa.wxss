@@ -1,0 +1,35 @@
+page {
+    background-color: #4242b2;
+}
+.bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  display: block;
+  width: 100%;
+  height: auto;
+  z-index: -999;
+}
+
+.main {
+    position: absolute;
+    width: 100%;
+    align-items: center;
+}
+
+.join-btn {
+    background-color: transparent;
+    color: white;
+    font-size: 30rpx;
+    border: solid 1px;
+    border-radius: 0px;
+    margin-left: 220rpx;
+    margin-right: 220rpx;
+    height: 70rpx;
+    line-height: 70rpx;
+}
+
+.join-btn:active {
+    background-color: #ffffff34;
+}
