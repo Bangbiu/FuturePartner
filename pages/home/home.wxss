@@ -1,18 +1,21 @@
 .main {
     width: 100%;
     box-sizing: border-box;
-    padding-left: 32rpx;
-    padding-right: 32rpx;
     padding-top: 48rpx;
     padding-bottom: 240rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 .title-wrap {
     display: flex;
     flex-direction: column;
+    padding-left: 150rpx;
+    margin-bottom: 50rpx;
     align-items:flex-start;
     justify-content: flex-start;
-    padding-left: 16rpx;
-    padding-right: 16rpx;
+    width: 100%;
 }
 
 .title {
@@ -20,4 +23,64 @@
     font-weight: 500;
     color: #000000;
     font-size: 44rpx;
+}
+
+.qrcode-frame {
+    padding: 15rpx 15rpx 15rpx 15rpx;
+    background-color: white;
+    border: #cccccc solid 1.5px;
+    border-radius: 5px;
+}
+
+.qrcode {
+    height: 600rpx;
+    width: 600rpx;
+}
+
+.token-card {
+    width: 100%;
+    height: 200rpx;
+    background-size: cover;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+
+.token-icon {
+    margin-left: 40rpx;
+    width: 72rpx;
+    height: 72rpx;
+}
+  
+.token-card__header {
+    display: flex;
+    margin-top: 30rpx;
+    margin-bottom: 20rpx;
+    border-radius: 7px;
+    padding: 13rpx;
+    justify-content: flex-start;
+    align-items: center;
+    color: #333;
+    background-color: white;
+    width: 80%;
+}
+
+.token-card__header:active {
+    background-color: #f0f0f0;
+}
+
+.token-card__header__name {
+    font-size: 36rpx;
+    line-height: 48rpx;
+    color: #333;
+    font-weight: bold;
+    margin-left: 32rpx;
+    margin-right: 16rpx;
+}
+
+.forward-icon {
+    position: absolute;
+    right: 80rpx;
+    width: 100rpx;
+    height: 100rpx;
 }

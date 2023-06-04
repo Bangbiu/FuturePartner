@@ -1,7 +1,20 @@
 <view class="main">
   
-  <view class="title-wrap">
-    <view class="title">欢迎回来！</view>
-  </view>
-  <image src="{{qrimage}}"></image>
+    <view class="title-wrap">
+        <view class="title">欢迎回来! {{partnerInfo.name}}</view>
+    </view>
+
+    <view class="qrcode-frame">
+        <image class="qrcode" src="{{qrimage}}" show-menu-by-longpress></image>
+    </view>
+  
+    <view class="token-card">
+        <view class="token-card__header">
+            <image class="token-icon" src="/assets/token.png"></image>
+            <view class="token-card__header__name">收益查询</view>
+            <image class="forward-icon" src="/assets/forward_icon.png"></image>
+        </view>
+    </view>
+
+
 </view>

@@ -4,15 +4,13 @@ Page({
 
 
     data: {
-        partner_id: 1,
-        partner_name: "无",
+        partnerInfo: {},
         qrimage: "/assets/unregistered.jpg"
     },
 
     checkisRegistered() {
         if (!app.globalData.partnerInfo.registered) {
-            wx.navigateTo({ url: '/pages/propa/propa' });
-            return false;
+            wx.redirectTo({url: '/pages/propa/propa'});
         }
         return true;
     },
@@ -26,8 +24,7 @@ Page({
             .then(res => {
                 if (that.checkisRegistered()) {
                     that.setData({
-                        partner_id: res.ID,
-                        partner_name: res.name,
+                        partnerInfo: res,
                         qrimage: gdata.entries.partner_qr + "?ID=" + res.ID
                     });
                 }

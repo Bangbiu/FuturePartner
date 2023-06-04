@@ -1,6 +1,12 @@
 
+
+<view class="block">
+    <t-steps current="{{step}}" bind:change="onChangeStep">
+        <t-step-item wx:for="{{form.groups}}" wx:for-item="group" wx:key="index" title="{{group.title}}" content="{{group.hint}}" />
+    </t-steps>
+</view>
 <view class="main">
-    <view class="group-card" wx:key="group" wx:for="{{form.groups}}" wx:for-item="group">
+    <view class="group-card" wx:key="group" wx:for="{{form.groups}}" wx:if="{{gInd==step}}" wx:for-item="group" wx:for-index = "gInd">
         <view class="group-card__header">
             <view class="group-title">{{group.title}}</view>
             <t-divider></t-divider>
@@ -89,7 +95,15 @@
         </view>
     </view>
     <t-button 
-        wx:if="{{state == 'editing'}}"
+        wx:if="{{step != form.groups.length - 1}}"
+        theme="primary" 
+        size="large" 
+        icon="cloud"
+        style="width:85%; margin-bottom: 40rpx; margin-top: 30rpx"
+        bindtap="onChangeStep"
+    >下一步</t-button>
+    <t-button 
+        wx:if="{{state == 'editing' && step == form.groups.length - 1}}"
         theme="primary" 
         size="large" 
         icon="cloud"
@@ -97,7 +111,7 @@
         bindtap="onSubmit"
     >提交</t-button>
     <t-button 
-        wx:if="{{state == 'processing'}}"
+        wx:if="{{state == 'processing' && step == form.groups.length - 1}}"
         loading
         theme="primary" 
         size="large" 

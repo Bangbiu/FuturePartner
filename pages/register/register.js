@@ -1,5 +1,5 @@
 import Message from 'tdesign-miniprogram/message/index';
-import form from "./form.js"
+import form from "./data/form.js"
 const app = getApp();
 
 Page({
@@ -7,6 +7,7 @@ Page({
     data: {
         form,
         state: "editing",
+        step: 0,
 
         cas: {
             on: false,
@@ -26,7 +27,6 @@ Page({
         cellStyle: 'border: 2rpx solid rgba(220,220,220,1);margin-top: 40rpx;',
     },
     onLoad(options) {
-        Object.assign(this.data.form.dataset.user, app.globalData.inviterInfo);
         const that = this;
         this.setData({form: that.data.form});
     },
@@ -48,7 +48,6 @@ Page({
         const target = this.data.form.dataset[ds.group][ds.field]
         const that = this;
         if (target.length >= 20) return;
-        ds.defs[0] += target.length + 1;
         target.push(ds.defs);
         this.setData({
             form: that.data.form,
@@ -105,6 +104,14 @@ Page({
         }) ;
     },
 
+    onChangeStep(args) {
+        if (args.detail.current != undefined)
+            this.setData({ step: args.detail.current });
+        else
+        this.setData({ step: this.data.step + 1 });
+        //this.setData({step: this.data.step + 1});
+    },
+
     onSubmit(args) {
         const ds = this.data.form.dataset;
         const that = this;
@@ -118,7 +125,8 @@ Page({
         wx.showToast({title: "正在上传", icon:  "loading", duration: 10000});
         //Preprocessing
         const hostInfo = Object.assign({}, ds.host);
-        hostInfo.inviter_id = ds.user.inviter_id;
+        hostInfo.inviter_id = ds.inviter.id;
+        hostInfo.inviter_type = ds.inviter.type;
         hostInfo.products = JSON.stringify(hostInfo.products);
         hostInfo.owner_id = app.globalData.user_openid;
         console.log(hostInfo);
@@ -142,7 +150,7 @@ Page({
         for (const grp in ds) {
             for (const fld in ds[grp]) {
                 const value = ds[grp][fld];
-                if (value == "" || value == undefined) return false;
+                if (value == undefined) return false
                 if (value instanceof Array && value.length == 0) return false;
             }
         }

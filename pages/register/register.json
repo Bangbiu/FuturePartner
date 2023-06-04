@@ -1,5 +1,7 @@
 {
     "usingComponents": {
+        "t-steps": "tdesign-miniprogram/steps/steps",
+        "t-step-item": "tdesign-miniprogram/step-item/step-item",
         "t-input": "tdesign-miniprogram/input/input",
         "t-textarea": "tdesign-miniprogram/textarea/textarea",
         "t-checkbox-group": "tdesign-miniprogram/checkbox-group/checkbox-group",
